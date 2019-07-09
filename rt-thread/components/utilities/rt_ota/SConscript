@@ -1,0 +1,12 @@
+Import('RTT_ROOT')
+from building import *
+
+cwd = GetCurrentDir()
+
+src = Glob('src/*.c')
+
+path = [cwd + '/inc']
+
+group = DefineGroup('rt_ota', src, depend = ['RT_USING_RT_OTA'], CPPPATH = path)
+
+Return('group')

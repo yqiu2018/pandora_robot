@@ -1,0 +1,43 @@
+menuconfig RT_USING_RT_OTA
+    bool "OTA: The RT-Thread Over-the-air Programming package"
+    select PKG_USING_FAL
+    default n
+
+if RT_USING_RT_OTA
+
+    config RT_OTA_DEBUG
+        bool "Enable debug log output"
+        default n
+
+    config RT_OTA_USING_CRYPT
+        bool "Enable encryption"
+        default n
+        select PKG_USING_TINYCRYPT
+
+    if  RT_OTA_USING_CRYPT
+
+        config RT_OTA_CRYPT_ALGO_USING_AES256
+            bool "Enable AES_256 encryption"
+            default n
+
+    endif
+
+    config RT_OTA_USING_CMPRS
+        bool "Enable compression"
+        default n
+
+    if  RT_OTA_USING_CMPRS
+
+        config RT_OTA_CMPRS_ALGO_USING_QUICKLZ
+            bool "Enable QUICKLZ compression"
+            default n
+            select PKG_USING_QUICKLZ
+
+        config RT_OTA_CMPRS_ALGO_USING_FASTLZ
+            bool "Enable FASTLZ compression"
+            default n
+            select PKG_USING_FASTLZ
+
+    endif
+
+endif
