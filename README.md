@@ -1,9 +1,9 @@
-# ÖÇÄÜÕ½³µ 
+# æ™ºèƒ½æˆ˜è½¦ 
 
 
 
-| ¶ÓÎéÃû   | ÏîÄ¿Ãû               | Github µØÖ·                                                  |
+| é˜Ÿä¼å   | é¡¹ç›®å               | Github åœ°å€                                                  |
 | -------- | -------------------- | ------------------------------------------------------------ |
-| ¿ñ±©Õ½³µ | ÅË¶àÀ­²îËÙÖÇÄÜ³µ     | https://github.com/yqiu2018/pandora_robot/application/pandora_diff_car |
-| ¿ñ±©Õ½³µ | ÅË¶àÀ­Âó¿ËÄÉÄ·ÖÇÄÜ³µ | https://github.com/yqiu2018/pandora_robot/application/pandora_mecanum_car |
+| ç‹‚æš´æˆ˜è½¦ | æ½˜å¤šæ‹‰å·®é€Ÿæ™ºèƒ½è½¦     | https://github.com/yqiu2018/pandora_robot/tree/master/application/pandora_diff_car |
+| ç‹‚æš´æˆ˜è½¦ | æ½˜å¤šæ‹‰éº¦å…‹çº³å§†æ™ºèƒ½è½¦ | https://github.com/yqiu2018/pandora_robot/tree/master/application/pandora_mecanum_car |
 
