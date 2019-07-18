@@ -117,11 +117,6 @@ config RT_USING_MTD_NAND
     config RT_MTD_NAND_DEBUG
         bool "Enable MTD Nand operations debug information"
         default n
-
-    config RT_USING_NFTL
-        bool "Enable NAND Flash Translation Layer"
-        select RT_USING_DFS
-        default n
     endif
 
 config RT_USING_MTD
