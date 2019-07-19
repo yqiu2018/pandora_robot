@@ -1,26 +1,42 @@
-menu "External Libraries"
+config SOC_FAMILY_STM32
+    bool
 
-    config RT_USING_WIFI_6181_LIB
-        bool "Using Wifi(AP6181) Library"
-        default n
+config SOC_SERIES_STM32F0
+    bool
+    select ARCH_ARM_CORTEX_M0
+    select SOC_FAMILY_STM32
 
-    config RT_USING_OTA_LIB
-        bool "Using RT-Thrad OTA Library"
-        default n
+config SOC_SERIES_STM32F1
+    bool
+    select ARCH_ARM_CORTEX_M3
+    select SOC_FAMILY_STM32
+
+config SOC_SERIES_STM32F4
+    bool
+    select ARCH_ARM_CORTEX_M4
+    select SOC_FAMILY_STM32
+
+config SOC_SERIES_STM32F7
+    bool
+    select ARCH_ARM_CORTEX_M7
+    select SOC_FAMILY_STM32
     
-    config RT_USING_CLOUDSDK_LIB
-        bool "Using CloudSDK(RTT Cloud) Library"
-        default n
-        select RT_USING_OTA_LIB
-        select PKG_USING_CJSON
-        select PKG_USING_EASYFLASH
-        select PKG_USING_FAL
-        select PKG_USING_PAHOMQTT
-        select PKG_USING_TINYCRYPT
-        select PKG_USING_WEBCLIENT
+config SOC_SERIES_STM32L0
+    bool
+    select ARCH_ARM_CORTEX_M0
+    select SOC_FAMILY_STM32
 
-    config RT_USING_SMARTCONFIG_LIB
-        bool "Using RT-Thrad SmartConfig Library"
-        default n
-    
-endmenu
+config SOC_SERIES_STM32L4
+    bool
+    select ARCH_ARM_CORTEX_M4
+    select SOC_FAMILY_STM32
+
+config SOC_SERIES_STM32G0
+    bool
+    select ARCH_ARM_CORTEX_M0
+    select SOC_FAMILY_STM32
+
+config SOC_SERIES_STM32H7
+    bool
+    select ARCH_ARM_CORTEX_M7
+    select SOC_FAMILY_STM32
