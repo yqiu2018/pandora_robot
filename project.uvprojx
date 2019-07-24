@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER, STM32L475xx</Define>
               <Undefine></Undefine>
-              <IncludePath>.;rt-thread\include;.;applications;board;board\CubeMX_Config\Inc;board\ports;libraries\HAL_Drivers;libraries\HAL_Drivers\config;packages\rt-robot-latest\chassis;packages\rt-robot-latest\encoder;packages\rt-robot-latest\kinematics;packages\rt-robot-latest\modules\motor;packages\rt-robot-latest\modules\sensors;packages\rt-robot-latest\motor;packages\rt-robot-latest\pid;packages\rt-robot-latest\wheel;rt-thread\libcpu\arm\cortex-m4;rt-thread\libcpu\arm\common;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\finsh;libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Inc;libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Include;libraries\STM32L4xx_HAL\CMSIS\Include</IncludePath>
+              <IncludePath>.;rt-thread\include;.;applications;board;board\CubeMX_Config\Inc;board\ports;libraries\HAL_Drivers;libraries\HAL_Drivers\config;packages\rt-robot-latest\chassis;packages\rt-robot-latest\controller;packages\rt-robot-latest\encoder;packages\rt-robot-latest\kinematics;packages\rt-robot-latest\motor;packages\rt-robot-latest\pid;packages\rt-robot-latest\robot;packages\rt-robot-latest\wheel;rt-thread\libcpu\arm\cortex-m4;rt-thread\libcpu\arm\common;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\finsh;libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Inc;libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Include;libraries\STM32L4xx_HAL\CMSIS\Include</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -533,9 +533,29 @@
               <FilePath>packages\rt-robot-latest\chassis\chassis.c</FilePath>
             </File>
             <File>
+              <FileName>command.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\controller\command.c</FilePath>
+            </File>
+            <File>
+              <FileName>ps2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\controller\ps2.c</FilePath>
+            </File>
+            <File>
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\rt-robot-latest\encoder\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>encoder_AB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\encoder\encoder_AB.c</FilePath>
+            </File>
+            <File>
+              <FileName>encoder_single.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\encoder\encoder_single.c</FilePath>
             </File>
             <File>
               <FileName>kinematics.c</FileName>
@@ -545,7 +565,7 @@
             <File>
               <FileName>dc_motor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\modules\motor\dc_motor.c</FilePath>
+              <FilePath>packages\rt-robot-latest\motor\dc_motor.c</FilePath>
             </File>
             <File>
               <FileName>motor.c</FileName>
@@ -556,6 +576,16 @@
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>packages\rt-robot-latest\pid\pid.c</FilePath>
+            </File>
+            <File>
+              <FileName>mobile_robot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\robot\mobile_robot.c</FilePath>
+            </File>
+            <File>
+              <FileName>robot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\robot\robot.c</FilePath>
             </File>
             <File>
               <FileName>wheel.c</FileName>

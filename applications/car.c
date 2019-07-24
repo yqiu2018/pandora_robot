@@ -1,5 +1,6 @@
 #include <rtthread.h>
 #include <chassis.h>
+#include <ps2.h>
 
 #define DBG_SECTION_NAME  "car"
 #define DBG_LEVEL         DBG_LOG
@@ -19,7 +20,7 @@ extern int right_motor_set_speed(rt_int8_t percentage);
 #define LEFT_ENCODER_PIN            62     // GET_PIN(D, 14)
 #define RIGHT_ENCODER_PIN           61     // GET_PIN(D, 13)
 #define PULSE_PER_REVOL             20     // Real value 20
-#define SAMPLE_TIME                1000
+#define SAMPLE_TIME               1000
 
 // PID
 #define PID_SAMPLE_TIME             50
@@ -39,19 +40,27 @@ chassis_t chas;
 #define THREAD_STACK_SIZE          512
 #define THREAD_TIMESLICE             5
 
-// static rt_thread_t tid_car = RT_NULL;
+static rt_thread_t tid_car = RT_NULL;
 
-// void car_thread(void *param)
-// {
-//     // TODO
+static rt_err_t car_stop(rt_int8_t cmd, void *param);
+static rt_err_t car_forward(rt_int8_t cmd, void *param);
+static rt_err_t car_backward(rt_int8_t cmd, void *param);
+static rt_err_t car_turnleft(rt_int8_t cmd, void *param);
+static rt_err_t car_turnright(rt_int8_t cmd, void *param);
 
-//     while (1)
-//     {
-//         rt_thread_mdelay(50);
-//     }
+void car_thread(void *param)
+{
+    // TODO
 
-// //    chassis_destroy(chas);
-// }
+    while (1)
+    {
+        rt_thread_mdelay(PID_SAMPLE_TIME);
+        wheel_update(chas->c_wheels[0]);
+        wheel_update(chas->c_wheels[1]);
+    }
+
+//    chassis_destroy(chas);
+}
 
 void car_init(void *parameter)
 {
@@ -93,15 +102,87 @@ void car_init(void *parameter)
     pid_set_sample_time(chas->c_wheels[0]->w_pid, PID_SAMPLE_TIME);
     pid_set_sample_time(chas->c_wheels[1]->w_pid, PID_SAMPLE_TIME);
 
-    // tid_car = rt_thread_create("tcar",
-    //                           car_thread, RT_NULL,
-    //                           THREAD_STACK_SIZE,
-    //                           THREAD_PRIORITY, THREAD_TIMESLICE);
+    // Set speed
+    struct velocity target_vel;
+    target_vel.linear_x = 0.00f;    // m/s
+    target_vel.linear_y = 0;
+    target_vel.angular_z = 0;       // rad/s
+    chassis_set_velocity(chas, target_vel);
 
-    // if (tid_car != RT_NULL)
-    // {
-    //     rt_thread_startup(tid_car);
-    // }
+    // Command register
+    command_register(COMMAND_CAR_STOP, car_stop);
+    command_register(COMMAND_CAR_FORWARD, car_forward);
+    command_register(COMMAND_CAR_BACKWARD, car_backward);
+    command_register(COMMAND_CAR_TURNLEFT, car_turnleft);
+    command_register(COMMAND_CAR_TURNRIGHT, car_turnright);
+
+    // Controller init
+    ps2_init();
+
+    tid_car = rt_thread_create("tcar",
+                              car_thread, RT_NULL,
+                              THREAD_STACK_SIZE,
+                              THREAD_PRIORITY, THREAD_TIMESLICE);
+
+    if (tid_car != RT_NULL)
+    {
+        rt_thread_startup(tid_car);
+    }
 }
 
+static rt_err_t car_stop(rt_int8_t cmd, void *param)
+{
+    struct velocity target_vel;
+    target_vel.linear_x = 0.00f;   
+    target_vel.linear_y = 0;
+    target_vel.angular_z = 0;       
+    chassis_set_velocity(chas, target_vel);
+    LOG_I("stop cmd");
 
+    return RT_EOK;
+}
+static rt_err_t car_forward(rt_int8_t cmd, void *param)
+{
+    struct velocity target_vel;
+    target_vel.linear_x = 0.20f;   
+    target_vel.linear_y = 0;
+    target_vel.angular_z = 0;       
+    chassis_set_velocity(chas, target_vel);
+    LOG_I("forward cmd");
+
+    return RT_EOK;
+}
+static rt_err_t car_backward(rt_int8_t cmd, void *param)
+{
+    // Can't backward
+    struct velocity target_vel;
+    target_vel.linear_x = 0.00f;   
+    target_vel.linear_y = 0;
+    target_vel.angular_z = 0;      
+    chassis_set_velocity(chas, target_vel);
+    LOG_I("backward cmd");
+
+    return RT_EOK;
+}
+static rt_err_t car_turnleft(rt_int8_t cmd, void *param)
+{
+    struct velocity target_vel;
+    target_vel.linear_x = 0.00f;   
+    target_vel.linear_y = 0;
+    target_vel.angular_z = 2;      
+    chassis_set_velocity(chas, target_vel);
+    LOG_I("turnleft cmd");
+
+    return RT_EOK;
+}
+static rt_err_t car_turnright(rt_int8_t cmd, void *param)
+{
+    struct velocity target_vel;
+    target_vel.linear_x = 0.00f;   
+    target_vel.linear_y = 0;
+    target_vel.angular_z = -2;      
+    chassis_set_velocity(chas, target_vel);
+    LOG_I("turnright cmd");
+
+    return RT_EOK;
+}
