@@ -11,7 +11,6 @@
 #include <rtthread.h>
 #include <rtdevice.h>
 #include <board.h>
-
 /* defined the LED0 pin: PE7 */
 #define LED0_PIN    GET_PIN(E, 7)
 
@@ -36,3 +35,5 @@ int main(void)
 
     return RT_EOK;
 }
+
+
