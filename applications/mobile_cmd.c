@@ -4,6 +4,7 @@
 #include <chassis.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <inc_pid_controller.h>
 
 float stof(const char *s)
 {
@@ -69,3 +70,38 @@ static void mobile_robot(int argc, char *argv[])
     }
 }
 MSH_CMD_EXPORT(mobile_robot, move mobile robot);
+
+static void car_pid(int argc, char *argv[])
+{
+    if (argc < 4)
+    {
+        return;
+    }
+    float kp = stof(argv[1]);
+    float ki = stof(argv[2]);
+    float kd = stof(argv[3]);
+    inc_pid_controller_t left = (inc_pid_controller_t)chas->c_wheels[0]->w_controller;
+    inc_pid_controller_t right = (inc_pid_controller_t)chas->c_wheels[1]->w_controller;
+    left->kp = kp;
+    left->ki = ki;
+    left->kd = kd;
+
+    right->kp = kp;
+    right->ki = ki;
+    right->kd = kd;
+}
+MSH_CMD_EXPORT(car_pid, wheel pid);
+
+
+static void car_temp(int argc, char *argv[])
+{
+    if (argc < 2)
+    {
+        return;
+    }
+    if (!rt_strcmp("readenc", argv[1]))
+    {
+        rt_kprintf("pulse:%d dir:%d cps:%d --- pluse:%d dir:%d cps:%d\n", chas->c_wheels[0]->w_encoder->pulse_count, chas->c_wheels[0]->w_encoder->dir, chas->c_wheels[0]->w_encoder->cps, chas->c_wheels[1]->w_encoder->pulse_count, chas->c_wheels[1]->w_encoder->dir, chas->c_wheels[1]->w_encoder->cps);
+    }
+}
+MSH_CMD_EXPORT(car_temp, car_temp car_temp);

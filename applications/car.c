@@ -25,8 +25,8 @@
 // ENCODER
 #define LEFT_ENCODER_A_PHASE_PIN    31      // GET_PIN(B, 15)
 #define LEFT_ENCODER_B_PHASE_PIN    34      // GET_PIN(C, 2)
-#define RIGHT_ENCODER_A_PHASE_PIN   38      // GET_PIN(C, 6)
-#define RIGHT_ENCODER_B_PHASE_PIN   39      // GET_PIN(C, 7)
+#define RIGHT_ENCODER_A_PHASE_PIN   36      //
+#define RIGHT_ENCODER_B_PHASE_PIN   8       //
 #define PULSE_PER_REVOL           2000      // Real value 2000
 #define SAMPLE_TIME                 50
 
@@ -51,13 +51,10 @@ chassis_t chas;
 #define THREAD_STACK_SIZE          512
 #define THREAD_TIMESLICE             5
 
-static rt_err_t car_forward(rt_int8_t cmd, void *param);
-static rt_err_t car_backward(rt_int8_t cmd, void *param);
-static rt_err_t car_turnleft(rt_int8_t cmd, void *param);
-static rt_err_t car_turnright(rt_int8_t cmd, void *param);
-static rt_err_t car_stop(rt_int8_t cmd, void *param);
-
 static rt_thread_t tid_car = RT_NULL;
+
+static void command_register_all(void);
+void init_laser_and_gimbal(void);
 
 void car_thread(void *param)
 {
@@ -71,8 +68,8 @@ void car_thread(void *param)
     chassis_set_velocity(chas, target_velocity);
 
     // Open control
-    // auto_control_disable(chas->c_wheels[0]->w_control);
-    // auto_control_disable(chas->c_wheels[1]->w_control);
+    // controller_disable(chas->c_wheels[0]->w_controller);
+    // controller_disable(chas->c_wheels[1]->w_controller);
 
     while (1)
     {
@@ -125,16 +122,15 @@ void car_init(void *parameter)
     chassis_enable(chas);
 
     // Register command
-    command_register(COMMAND_CAR_STOP     , car_stop);
-    command_register(COMMAND_CAR_FORWARD  , car_forward);
-    command_register(COMMAND_CAR_BACKWARD , car_backward);
-    command_register(COMMAND_CAR_TURNLEFT , car_turnleft);
-    command_register(COMMAND_CAR_TURNRIGHT, car_turnright);
+    command_register_all();
 
     rt_kprintf("car command register complete\n");
 
     // Controller
-    ps2_init(28, 29, 4, 36);
+//    ps2_init(28, 29, 62, 61);
+
+    // Other
+    init_laser_and_gimbal();
 
     // thread
     tid_car = rt_thread_create("tcar",
@@ -146,6 +142,97 @@ void car_init(void *parameter)
     {
         rt_thread_startup(tid_car);
     }
+}
+
+
+#include <laser_launcher.h>
+#include <laser_receiver.h>
+#include <gimbal.h>
+
+#define GIMBAL_ANGLE_RANGE_X      200
+#define GIMBAL_ANGLE_RNAGE_Z      200
+
+
+static gimbal_t gimbal;
+
+static float gimbal_theta = 40;
+static float gimbal_phi = 105;
+
+void init_laser_and_gimbal(void)
+{
+    laser_launcher_init();
+    rt_kprintf("laser_launcher init\n");
+
+    servo_t servo_x = servo_create("pwm3", 1, GIMBAL_ANGLE_RANGE_X);
+    servo_t servo_z = servo_create("pwm3", 2, GIMBAL_ANGLE_RNAGE_Z);
+    gimbal = gimbal_create(servo_x, servo_z);
+    gimbal_enable(gimbal);
+    rt_kprintf("gimbal enable\n");
+    gimbal_set_angle(gimbal, 40, 105);
+}
+
+static rt_err_t laser_open(rt_int8_t cmd, void *param)
+{
+    laser_launcher_open();
+    LOG_D("laser_open cmd");
+    
+    return RT_EOK;
+}
+static rt_err_t laser_close(rt_int8_t cmd, void *param)
+{
+    laser_launcher_close();
+    LOG_D("laser_close cmd");
+
+    return RT_EOK;
+}
+static rt_err_t laser_keep(rt_int8_t cmd, void *param)
+{
+    LOG_D("laser_keep cmd");
+    
+    return RT_EOK;
+}
+static rt_err_t gimbal_angle_theta(rt_int8_t cmd, void *param)
+{
+    static uint8_t angle = 0;
+
+    if (angle != *(uint8_t *)param)
+    {
+        angle = *(uint8_t *)param;
+        if (angle > 0x7F)
+        {
+            gimbal_theta = 40 - 30*(angle - 0x7F)/128;
+        }
+        else
+        {
+            gimbal_theta = 40 + 40*(0x7F - angle)/128;
+        }
+        
+        gimbal_set_angle(gimbal, gimbal_theta, gimbal_phi);
+        // LOG_D("gimbal_angle_theta cmd %d %d %d", angle, (int)gimbal_theta, (int)gimbal_phi);
+    }
+    
+    return RT_EOK;
+}
+static rt_err_t gimbal_angle_phi(rt_int8_t cmd, void *param)
+{
+    static uint8_t angle = 1;
+
+    if (angle != *(uint8_t *)param)
+    {
+        angle = *(uint8_t *)param;
+        if (angle > 0x80)
+        {
+            gimbal_phi = 100 - 60*(angle - 0x80)/128;
+        }
+        else
+        {
+            gimbal_phi = 100 + 60*(0x80 - angle)/128;
+        }
+        
+        gimbal_set_angle(gimbal, gimbal_theta, gimbal_phi);
+    }
+    
+    return RT_EOK;
 }
 
 static rt_err_t car_forward(rt_int8_t cmd, void *param)
@@ -218,6 +305,17 @@ static rt_err_t car_stop(rt_int8_t cmd, void *param)
     return RT_EOK;
 }
 
+static void command_register_all(void)
+{
+    command_register(COMMAND_CAR_STOP     , car_stop);
+    command_register(COMMAND_CAR_FORWARD  , car_forward);
+    command_register(COMMAND_CAR_BACKWARD , car_backward);
+    command_register(COMMAND_CAR_TURNLEFT , car_turnleft);
+    command_register(COMMAND_CAR_TURNRIGHT, car_turnright);
 
-
-
+    command_register(COMMAND_LASER_OPEN, laser_open);
+    command_register(COMMAND_LASER_CLOSE, laser_close);
+    command_register(COMMAND_LASER_KEEP, laser_keep);
+    command_register(COMMAND_GIMBAL_ANGLE_THETA, gimbal_angle_theta);
+    command_register(COMMAND_GIMBAL_ANGLE_PHI, gimbal_angle_phi);
+}

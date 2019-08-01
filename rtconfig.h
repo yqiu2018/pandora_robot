@@ -157,6 +157,13 @@
 
 /* peripheral libraries and drivers */
 
+#define PKG_USING_SENSORS_DRIVERS
+#define PKG_USING_MPU6XXX
+#define PKG_USING_MPU6XXX_LATEST_VERSION
+#define PKG_USING_MPU6XXX_ACCE
+#define PKG_USING_MPU6XXX_GYRO
+#define PKG_USING_I2C_TOOLS
+#define PKG_USING_I2C_TOOLS_LATEST_VERSION
 
 /* miscellaneous packages */
 
@@ -173,6 +180,7 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_STLINK_TO_USART
+#define BSP_USING_ICM20608
 
 /* On-chip Peripheral Drivers */
 
@@ -180,8 +188,13 @@
 #define BSP_USING_UART
 #define BSP_USING_UART1
 #define BSP_USING_SPI
-#define BSP_USING_SPI2
 #define BSP_USING_I2C
+#define BSP_USING_I2C2
+
+/* Notice: PB14 --> 30; PD12 --> 60 */
+
+#define BSP_I2C2_SCL_PIN 30
+#define BSP_I2C2_SDA_PIN 60
 #define BSP_USING_I2C3
 
 /* Notice: PC0 --> 32; PC1 --> 33 */
@@ -192,9 +205,14 @@
 #define BSP_USING_PWM2
 #define BSP_USING_PWM2_CH3
 #define BSP_USING_PWM2_CH4
+#define BSP_USING_PWM3
+#define BSP_USING_PWM3_CH1
+#define BSP_USING_PWM3_CH2
 #define BSP_USING_PWM4
 #define BSP_USING_PWM4_CH3
 #define BSP_USING_PWM4_CH4
+#define BSP_USING_ADC
+#define BSP_USING_ADC1
 
 /* Board extended module Drivers */
 

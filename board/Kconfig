@@ -103,21 +103,6 @@ menu "On-chip Peripheral Drivers"
                 depends on BSP_USING_SPI1
                 select BSP_SPI1_TX_USING_DMA
                 default n
-
-            config BSP_USING_SPI2
-                bool "Enable SPI2 BUS"
-                default n  
-                
-            config BSP_SPI2_TX_USING_DMA
-                bool "Enable SPI2 TX DMA"
-                depends on BSP_USING_SPI2
-                default n
-                
-            config BSP_SPI2_RX_USING_DMA
-                bool "Enable SPI2 RX DMA"
-                depends on BSP_USING_SPI2
-                select BSP_SPI2_TX_USING_DMA
-                default n
         endif
 
     config BSP_USING_QSPI
@@ -137,6 +122,21 @@ menu "On-chip Peripheral Drivers"
         select RT_USING_I2C_BITOPS
         select RT_USING_PIN
         if BSP_USING_I2C
+			menuconfig BSP_USING_I2C2
+                bool "Enable I2C2 BUS (software simulation)"
+                default n
+                if BSP_USING_I2C2
+                    comment "Notice: PB14 --> 30; PD12 --> 60" 
+                    config BSP_I2C2_SCL_PIN
+                        int "i2c2 scl pin number"
+                        range 1 176
+                        default 30
+                    config BSP_I2C2_SDA_PIN
+                        int "I2C2 sda pin number"
+                        range 1 176
+                        default 60
+                endif
+				
             menuconfig BSP_USING_I2C3
                 bool "Enable I2C3 BUS (software simulation)"
                 default y
@@ -208,6 +208,17 @@ menu "On-chip Peripheral Drivers"
                     default n
 				config BSP_USING_PWM2_CH4
                     bool "Enable PWM2 channel4"
+                    default n
+            endif
+		menuconfig BSP_USING_PWM3
+            bool "Enable timer3 output pwm"
+            default n
+            if BSP_USING_PWM3
+                config BSP_USING_PWM3_CH1
+                    bool "Enable PWM3 channel1"
+                    default n
+				config BSP_USING_PWM3_CH2
+                    bool "Enable PWM4 channel2"
                     default n
             endif
         menuconfig BSP_USING_PWM4

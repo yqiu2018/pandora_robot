@@ -27,6 +27,12 @@ static int _serial_init(void)
     return RT_EOK;
 }
 
+void ano_init_all(void)
+{
+    ano_init(0);
+    _serial_init();
+}
+
 uint8_t ano_read_byte_port(void)
 {
     uint8_t temp;

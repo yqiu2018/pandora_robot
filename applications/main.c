@@ -24,7 +24,8 @@ int main(void)
     
     /* set LED0 pin mode to output */
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
-
+    rt_pin_mode(63, PIN_MODE_OUTPUT);
+    rt_pin_write(63, PIN_HIGH);
     while (count++)
     {
         rt_pin_write(LED0_PIN, PIN_HIGH);
