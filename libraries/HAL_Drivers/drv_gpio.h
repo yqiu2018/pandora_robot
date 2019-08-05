@@ -28,6 +28,8 @@
         -1, 0, 0                                                            \
     }
 
+#define PIN_WIFI_IRQ    37
+
 /* STM32 GPIO driver */
 struct pin_index
 {
