@@ -103,6 +103,7 @@ void rt_hw_us_delay(rt_uint32_t us)
     } while(delta < us_tick * us);
 }
 
+static struct rt_memheap memheap;
 /**
  * This function will initial STM32 board.
  */
@@ -128,6 +129,7 @@ RT_WEAK void rt_hw_board_init()
     /* Heap initialization */
 #if defined(RT_USING_HEAP)
     rt_system_heap_init((void *)HEAP_BEGIN, (void *)HEAP_END);
+    rt_memheap_init(&memheap, "sram2", (void *)STM32_SRAM2_BEGIN, STM32_SRAM2_HEAP_SIZE);
 #endif
 
     /* Pin driver initialization is open by default */
