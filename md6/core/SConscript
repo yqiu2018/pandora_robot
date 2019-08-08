@@ -1,0 +1,34 @@
+Import('RTT_ROOT')
+Import('rtconfig')
+from building import *
+
+cwd = GetCurrentDir()
+
+# add the general source.
+src = Split("""
+""")
+
+src += Glob('driver/eMPL/*.c')
+src += Glob('driver/stm32L/*.c')
+src += Glob('eMPL-hal/*.c')
+src += Glob('mllite/*.c')
+src += Glob('mpl/*.c')
+
+path = Split("""
+""")
+
+path += [cwd + '/driver/eMPL']
+path += [cwd + '/driver/include']
+path += [cwd + '/driver/stm32L']
+path += [cwd + '/eMPL-hal']
+path += [cwd + '/mllite']
+path += [cwd + '/mpl']
+
+CPPDEFINES = ['MPL_LOG_NDEBUG=1']
+CPPDEFINES += ['MPU9250']
+CPPDEFINES += ['EMPL']
+CPPDEFINES += ['EMPL_TARGET_STM32L']
+
+group = DefineGroup('md6_core', src, depend = [''], CPPPATH = path, CPPDEFINES = CPPDEFINES)
+
+Return('group')

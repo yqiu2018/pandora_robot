@@ -1,6 +1,8 @@
 #include <rtthread.h>
 #include <imu.h>
 #include <ahrs.h>
+#include <ano.h>
+#include <math.h>
 
 // Ahrs Thread
 #define THREAD_DELAY_TIME           5
@@ -29,24 +31,33 @@ static void ahrs_app_thread(void *param)
     {
         rt_thread_mdelay(THREAD_DELAY_TIME);
         imu_update(&imu);
-        ahrs_9dof_update(imu.data.gyrData[0], imu.data.gyrData[1], imu.data.gyrData[2],
+
+//        imu.data.gyrData[0] = 0.0f;
+//        imu.data.gyrData[1] = 0.0f;
+//        imu.data.gyrData[2] = 0.0f;
+        // imu.data.magData[0] = 100.0f;
+        // imu.data.magData[1] = 100.0f;
+        // imu.data.magData[2] = 100.0f;
+        MadgwickAHRSupdate(imu.data.gyrData[0], imu.data.gyrData[1], imu.data.gyrData[2],
                         imu.data.accData[0], imu.data.accData[1], imu.data.accData[2],
                         imu.data.magData[0], imu.data.magData[1], imu.data.magData[2], (float)THREAD_DELAY_TIME/1000, rpy_state);
 
-        sum += rpy_state[2];
+        // sum += rpy_state[2];
 
-        if (count++ > 40)
-        {
-            count = 0;
-            yaw_average = sum / 40;
-            sum = 0.0f;
-        }
+        // if (count++ > 40)
+        // {
+        //     count = 0;
+        //     yaw_average = sum / 40;
+        //     sum = 0.0f;
+        // }
+
+        float pos = atan(imu.data.magData[1]/imu.data.magData[0]);
 
         // rt_kprintf("rpy:%d %d %d\n", (int)rpy_state[0], (int)rpy_state[1], (int)rpy_state[2]);
-        // ano_send_status(state[0], state[1], state[2], 0,0,0);
-        // ano_send_senser(imu.data.accData[0], imu.data.accData[1], imu.data.accData[2],
-        //     imu.data.gyrData[0], imu.data.gyrData[1], imu.data.gyrData[2],
-        //     imu.data.magData[0], imu.data.magData[1], imu.data.magData[2], 0);
+        ano_send_status(rpy_state[0], rpy_state[1], rpy_state[2], pos,0,0);
+        ano_send_senser(imu.data.accData[0], imu.data.accData[1], imu.data.accData[2],
+            imu.data.gyrData[0], imu.data.gyrData[1], imu.data.gyrData[2],
+            imu.data.magData[0], imu.data.magData[1], imu.data.magData[2], 0);
     }
 }
 

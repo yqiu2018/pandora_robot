@@ -1,3 +1,6 @@
 [submodule "packages/rt-robot-latest"]
 	path = packages/rt-robot-latest
 	url = https://github.com/RT-Thread-packages/rt-robot
+[submodule "packages/mpu6xxx-latest"]
+	path = packages/mpu6xxx-latest
+	url = https://github.com/RT-Thread-packages/mpu-6xxx.git

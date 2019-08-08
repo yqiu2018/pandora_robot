@@ -69,6 +69,11 @@ static int imu_get_raw_data(imu_t *imux)
         imux->data.magRaw[1] = data16[8]; /* Mag.Y */
         imux->data.magRaw[2] = data16[9]; /* Mag.Z */
     }
+    else{
+        imux->data.magRaw[0] = 0; /* Mag.X */
+        imux->data.magRaw[1] = 0; /* Mag.Y */
+        imux->data.magRaw[2] = 0; /* Mag.Z */
+    }
 #endif
 
     return status;

@@ -1,0 +1,25 @@
+Import('rtconfig')
+from building import *
+
+cwd = GetCurrentDir()
+
+LIBS    = []
+LIBPATH = []
+src = []
+
+#LIBPATH = [cwd]
+if rtconfig.CROSS_TOOL == 'gcc':
+    LIBS += ['liblibmplmpu']
+    LIBPATH = [cwd + '/gcc4.9.3/liblibmplmpu_m4_hardfp/']
+elif rtconfig.CROSS_TOOL == 'keil':
+    LIBS += ['libmpllib']
+    LIBPATH = [cwd + '/Keil/libmpllib_Keil_M4FP']
+else:
+    LIBS += ['libmpllib']
+    LIBPATH = [cwd + '/IAR/libmpllib_IAR_M4F']
+
+path = [cwd]
+
+group = DefineGroup('md6_mpl_library', src, depend = [''], CPPPATH = path, LIBS = LIBS, LIBPATH = LIBPATH)
+
+Return('group')

@@ -33,8 +33,9 @@ int mpu92_init(mpu_config_t *mpux)
     mpu92_mag_write_reg(AK8963_CNTL2, 0x01);      /* [0]  Reset Device                  */
     mpu92_mag_write_reg(AK8963_CNTL1, 0x00);      /* [1]  Power-down mode               */
     mpu92_mag_write_reg(AK8963_CNTL1, 0x0F);      /* [2]  Fuse ROM access mode          */
-    /*      Read sensitivity adjustment   */
+    // /*      Read sensitivity adjustment   */
     mpu92_mag_write_reg(AK8963_CNTL1, 0x00);      /* [3]  Power-down mode               */
+    rt_thread_mdelay(1);    // 100us
     mpu92_mag_write_reg(AK8963_CNTL1, 0x06);      /* [4]  Continuous measurement mode 2 */
 
     /* config mpu9250 i2c */

@@ -127,7 +127,7 @@ void car_init(void *parameter)
     rt_kprintf("car command register complete\n");
 
     // Controller
-//    ps2_init(28, 29, 62, 61);
+    ps2_init(28, 29, 62, 61);
 
     // Other
     init_laser_and_gimbal();

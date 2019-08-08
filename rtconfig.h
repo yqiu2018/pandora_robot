@@ -89,12 +89,8 @@
 #define RT_USING_I2C
 #define RT_USING_I2C_BITOPS
 #define RT_USING_PIN
-
 #define RT_USING_ADC
 #define RT_USING_PWM
-#define RT_USING_SENSOR
-#define RT_USING_SENSOR_CMD
-
 #define RT_USING_SDIO
 #define RT_SDIO_STACK_SIZE 512
 #define RT_SDIO_THREAD_PRIORITY 15
@@ -107,10 +103,8 @@
 #define RT_SFUD_USING_SFDP
 #define RT_SFUD_USING_FLASH_INFO_TABLE
 #define RT_SFUD_USING_QSPI
-
-/* Using Hardware Crypto drivers */
-
-
+#define RT_USING_SENSOR
+#define RT_USING_SENSOR_CMD
 
 /* Using WiFi */
 
@@ -189,6 +183,9 @@
 #define LWIP_NETIF_LOOPBACK 0
 #define RT_LWIP_USING_PING
 
+/* Modbus master and slave stack */
+
+
 /* AT commands */
 
 
@@ -210,6 +207,9 @@
 
 /* Wiced WiFi */
 
+#define PKG_USING_NETUTILS
+#define PKG_NETUTILS_TELNET
+#define PKG_USING_NETUTILS_V110
 
 /* IoT Cloud */
 
@@ -237,6 +237,12 @@
 
 /* system packages */
 
+#define PKG_USING_FAL
+#define FAL_DEBUG_CONFIG
+#define FAL_DEBUG 1
+#define FAL_PART_HAS_TABLE_CFG
+#define PKG_USING_FAL_LATEST_VERSION
+#define PKG_FAL_VER_NUM 0x99999
 #define PKG_USING_ROBOTS
 #define PKG_USING_ROBOTS_LATEST_VERSION
 #define PKG_ROBOT_VER_NUM 0x99999
@@ -248,18 +254,6 @@
 #define PKG_USING_MPU6XXX_LATEST_VERSION
 #define PKG_USING_MPU6XXX_ACCE
 #define PKG_USING_MPU6XXX_GYRO
-#define PKG_USING_I2C_TOOLS
-#define PKG_USING_I2C_TOOLS_LATEST_VERSION
-
-#define PKG_USING_FAL
-#define FAL_DEBUG_CONFIG
-#define FAL_DEBUG 1
-#define FAL_PART_HAS_TABLE_CFG
-#define PKG_USING_FAL_LATEST_VERSION
-#define PKG_FAL_VER_NUM 0x99999
-
-/* peripheral libraries and drivers */
-
 #define PKG_USING_STM32_SDIO
 #define SDIO_BUFF_SIZE 4096
 #define SDIO_MAX_FREQ 24000000
@@ -281,20 +275,19 @@
 /* Onboard Peripheral Drivers */
 
 #define BSP_USING_STLINK_TO_USART
-
-#define BSP_USING_ICM20608
-
 #define BSP_USING_QSPI_FLASH
 #define BSP_USING_WIFI
 #define BSP_USING_WIFI_AUTO_INIT
+#define BSP_USING_ICM20608
 
 /* On-chip Peripheral Drivers */
 
 #define BSP_USING_GPIO
 #define BSP_USING_UART
 #define BSP_USING_UART1
-
+#define BSP_USING_ON_CHIP_FLASH
 #define BSP_USING_SPI
+#define BSP_USING_QSPI
 #define BSP_USING_I2C
 #define BSP_USING_I2C2
 
@@ -320,14 +313,9 @@
 #define BSP_USING_PWM4_CH4
 #define BSP_USING_ADC
 #define BSP_USING_ADC1
-
-#define BSP_USING_ON_CHIP_FLASH
-#define BSP_USING_QSPI
 #define BSP_USING_SDIO
 
-
 /* Board extended module Drivers */
-
 
 /* External Libraries */
 

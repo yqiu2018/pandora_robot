@@ -336,15 +336,9 @@
             <v6Rtti>0</v6Rtti>
             <VariousControls>
               <MiscControls></MiscControls>
-<<<<<<< HEAD
-              <Define>USE_HAL_DRIVER, STM32L475xx</Define>
+              <Define>MPL_LOG_NDEBUG=1, EMPL, EMPL_TARGET_STM32L, MPU9250, STM32L475xx, USE_HAL_DRIVER, RT_USING_ARM_LIBC</Define>
               <Undefine></Undefine>
-              <IncludePath>.;rt-thread\include;.;applications;board;board\CubeMX_Config\Inc;board\ports;libraries\HAL_Drivers;libraries\HAL_Drivers\config;modules\ahrs;.;modules\ano;.;modules\gimbal;.;modules\imu;.;modules\laser;.;modules\port;.;modules\servo;.;packages\i2c-tools-latest;packages\i2c-tools-latest\src;packages\mpu6xxx-latest\inc;packages\rt-robot-latest\chassis;packages\rt-robot-latest\controller;packages\rt-robot-latest\encoder;packages\rt-robot-latest\kinematics;packages\rt-robot-latest\motor;packages\rt-robot-latest\protocol;packages\rt-robot-latest\robot;packages\rt-robot-latest\wheel;rt-thread\libcpu\arm\cortex-m4;rt-thread\libcpu\arm\common;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\sensors;rt-thread\components\drivers\include;rt-thread\components\finsh;libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Inc;libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Include;libraries\STM32L4xx_HAL\CMSIS\Include</IncludePath>
-=======
-              <Define>USE_HAL_DRIVER, RT_USING_ARM_LIBC, STM32L475xx</Define>
-              <Undefine></Undefine>
-              <IncludePath>.;rt-thread\include;.;applications;board;board\CubeMX_Config\Inc;board\ports;libraries\HAL_Drivers;libraries\HAL_Drivers\config;libraries\rt_ota\inc;libraries\HAL_Drivers\drv_flash;libraries\rt_ota\inc;libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Inc;libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Include;libraries\STM32L4xx_HAL\CMSIS\Include;libraries\wifi;ports\wifi;packages\EasyFlash-v3.3.0\inc;ports\easyflash;packages\fal-latest\inc;ports\fal;packages\stm32_sdio-v1.0.2;rt-thread\libcpu\arm\common;rt-thread\libcpu\arm\cortex-m4;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;rt-thread\components\drivers\wlan;rt-thread\components\finsh;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;rt-thread\components\net\lwip-2.0.2\src;rt-thread\components\net\lwip-2.0.2\src\include;rt-thread\components\net\lwip-2.0.2\src\include\ipv4;rt-thread\components\net\lwip-2.0.2\src\arch\include;rt-thread\components\net\lwip-2.0.2\src\include\netif;rt-thread\components\net\lwip-2.0.2\src\include\posix</IncludePath>
->>>>>>> ac6347b... add wifi support
+              <IncludePath>.;rt-thread\include;applications\ahrs;.;applications\ano;.;applications\gimbal;.;applications\imu;.;applications\laser;.;applications\port;.;applications\servo;.;.;applications\app;applications\cmd;.;board;board\CubeMX_Config\Inc;board\ports;libraries\HAL_Drivers;libraries\HAL_Drivers\config;libraries\rt_ota\inc;libraries\HAL_Drivers\drv_flash;libraries\rt_ota\inc;libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Inc;libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Include;libraries\STM32L4xx_HAL\CMSIS\Include;libraries\wifi;ports\wifi;md6\core\driver\eMPL;md6\core\driver\include;md6\core\driver\stm32L;md6\core\eMPL-hal;md6\core\mllite;md6\core\mpl;md6\mpl_libraries;packages\EasyFlash-v3.3.0\inc;ports\easyflash;packages\fal-latest\inc;ports\fal;packages\mpu6xxx-latest\inc;packages\netutils-v1.1.0\telnet;packages\rt-robot-latest\chassis;packages\rt-robot-latest\controller;packages\rt-robot-latest\encoder;packages\rt-robot-latest\kinematics;packages\rt-robot-latest\motor;packages\rt-robot-latest\protocol;packages\rt-robot-latest\robot;packages\rt-robot-latest\wheel;packages\stm32_sdio-v1.0.2;rt-thread\libcpu\arm\cortex-m4;rt-thread\libcpu\arm\common;rt-thread\components\dfs\include;rt-thread\components\dfs\filesystems\devfs;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\include;rt-thread\components\drivers\spi;rt-thread\components\drivers\include;rt-thread\components\drivers\spi\sfud\inc;rt-thread\components\drivers\include;rt-thread\components\drivers\wlan;rt-thread\components\drivers\sensors;rt-thread\components\drivers\include;rt-thread\components\finsh;rt-thread\components\libc\compilers\armlibc;rt-thread\components\libc\compilers\common;rt-thread\components\net\lwip-2.0.2\src;rt-thread\components\net\lwip-2.0.2\src\include;rt-thread\components\net\lwip-2.0.2\src\include\ipv4;rt-thread\components\net\lwip-2.0.2\src\arch\include;rt-thread\components\net\lwip-2.0.2\src\include\netif;rt-thread\components\net\lwip-2.0.2\src\include\posix</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -466,47 +460,117 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>modules</GroupName>
+          <Files>
+            <File>
+              <FileName>ahrs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ahrs\ahrs.c</FilePath>
+            </File>
+            <File>
+              <FileName>ano.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\ano\ano.c</FilePath>
+            </File>
+            <File>
+              <FileName>gimbal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\gimbal\gimbal.c</FilePath>
+            </File>
+            <File>
+              <FileName>imu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\imu\imu.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu9250.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\imu\mpu9250.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpu9250_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\imu\mpu9250_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>laser_launcher.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\laser\laser_launcher.c</FilePath>
+            </File>
+            <File>
+              <FileName>laser_receiver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\laser\laser_receiver.c</FilePath>
+            </File>
+            <File>
+              <FileName>ano_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\port\ano_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\servo\servo.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Applications</GroupName>
           <Files>
             <File>
-              <FileName>adc_cmd.c</FileName>
+              <FileName>app_ahrs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\adc_cmd.c</FilePath>
+              <FilePath>applications\app\app_ahrs.c</FilePath>
             </File>
             <File>
               <FileName>car.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\car.c</FilePath>
+              <FilePath>applications\app\car.c</FilePath>
             </File>
             <File>
-              <FileName>debug_cmd.c</FileName>
+              <FileName>inv_md6_user.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\debug_cmd.c</FilePath>
-            </File>
-            <File>
-              <FileName>gimbal_cmd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications\gimbal_cmd.c</FilePath>
-            </File>
-            <File>
-              <FileName>laser_cmd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>applications\laser_cmd.c</FilePath>
+              <FilePath>applications\app\inv_md6_user.c</FilePath>
             </File>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\main.c</FilePath>
+              <FilePath>applications\app\main.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Command</GroupName>
+          <Files>
+            <File>
+              <FileName>adc_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\cmd\adc_cmd.c</FilePath>
             </File>
             <File>
-              <FileName>mobile_cmd.c</FileName>
+              <FileName>debug_cmd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>applications\mobile_cmd.c</FilePath>
+              <FilePath>applications\cmd\debug_cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>gimbal_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\cmd\gimbal_cmd.c</FilePath>
             </File>
             <File>
               <FileName>imu_cmd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\applications\imu_cmd.c</FilePath>
+              <FilePath>applications\cmd\imu_cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>laser_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\cmd\laser_cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>mobile_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>applications\cmd\mobile_cmd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -523,7 +587,11 @@
               <FileType>1</FileType>
               <FilePath>board\CubeMX_Config\Src\stm32l4xx_hal_msp.c</FilePath>
             </File>
-<<<<<<< HEAD
+            <File>
+              <FileName>drv_qspi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>board\ports\drv_qspi_flash.c</FilePath>
+            </File>
             <File>
               <FileName>sensor_port.c</FileName>
               <FileType>1</FileType>
@@ -533,6 +601,16 @@
               <FileName>startup_stm32l475xx.s</FileName>
               <FileType>2</FileType>
               <FilePath>libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Source\Templates\arm\startup_stm32l475xx.s</FilePath>
+            </File>
+            <File>
+              <FileName>drv_sdio_adapter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\HAL_Drivers\drv_sdio_adapter.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_wlan.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\HAL_Drivers\drv_wlan.c</FilePath>
             </File>
             <File>
               <FileName>drv_gpio.c</FileName>
@@ -555,6 +633,11 @@
               <FilePath>libraries\HAL_Drivers\drv_spi.c</FilePath>
             </File>
             <File>
+              <FileName>drv_qspi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>libraries\HAL_Drivers\drv_qspi.c</FilePath>
+            </File>
+            <File>
               <FileName>drv_soft_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\HAL_Drivers\drv_soft_i2c.c</FilePath>
@@ -563,434 +646,6 @@
               <FileName>drv_adc.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\HAL_Drivers\drv_adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>drv_common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_common.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>modules</GroupName>
-          <Files>
-            <File>
-              <FileName>ahrs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\ahrs\ahrs.c</FilePath>
-            </File>
-            <File>
-              <FileName>ano.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\ano\ano.c</FilePath>
-            </File>
-            <File>
-              <FileName>gimbal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\gimbal\gimbal.c</FilePath>
-            </File>
-            <File>
-              <FileName>imu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\imu\imu.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpu9250.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\imu\mpu9250.c</FilePath>
-            </File>
-            <File>
-              <FileName>mpu9250_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\imu\mpu9250_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>laser_launcher.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\laser\laser_launcher.c</FilePath>
-            </File>
-            <File>
-              <FileName>laser_receiver.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\laser\laser_receiver.c</FilePath>
-            </File>
-            <File>
-              <FileName>ano_port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\port\ano_port.c</FilePath>
-            </File>
-            <File>
-              <FileName>servo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>modules\servo\servo.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>i2c-tools</GroupName>
-          <GroupOption>
-            <CommonProperty>
-              <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
-              <RVCTZI>0</RVCTZI>
-              <RVCTOtherData>0</RVCTOtherData>
-              <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>1</IncludeInBuild>
-              <AlwaysBuild>0</AlwaysBuild>
-              <GenerateAssemblyFile>0</GenerateAssemblyFile>
-              <AssembleAssemblyFile>0</AssembleAssemblyFile>
-              <PublicsOnly>0</PublicsOnly>
-              <StopOnExitCode>3</StopOnExitCode>
-              <CustomArgument></CustomArgument>
-              <IncludeLibraryModules></IncludeLibraryModules>
-              <ComprImg>0</ComprImg>
-            </CommonProperty>
-            <GroupArmAds>
-              <Cads>
-                <interw>2</interw>
-                <Optim>0</Optim>
-                <oTime>2</oTime>
-                <SplitLS>2</SplitLS>
-                <OneElfS>2</OneElfS>
-                <Strict>2</Strict>
-                <EnumInt>2</EnumInt>
-                <PlainCh>2</PlainCh>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <wLevel>0</wLevel>
-                <uThumb>2</uThumb>
-                <uSurpInc>2</uSurpInc>
-                <uC99>2</uC99>
-                <uGnu>2</uGnu>
-                <useXO>2</useXO>
-                <v6Lang>0</v6Lang>
-                <v6LangP>0</v6LangP>
-                <vShortEn>2</vShortEn>
-                <vShortWch>2</vShortWch>
-                <v6Lto>2</v6Lto>
-                <v6WtE>2</v6WtE>
-                <v6Rtti>2</v6Rtti>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define> </Define>
-                  <Undefine> </Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Cads>
-              <Aads>
-                <interw>2</interw>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <thumb>2</thumb>
-                <SplitLS>2</SplitLS>
-                <SwStkChk>2</SwStkChk>
-                <NoWarn>2</NoWarn>
-                <uSurpInc>2</uSurpInc>
-                <useXO>2</useXO>
-                <uClangAs>2</uClangAs>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Aads>
-            </GroupArmAds>
-          </GroupOption>
-          <Files>
-            <File>
-              <FileName>i2c_utils.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>packages\i2c-tools-latest\src\i2c_utils.cpp</FilePath>
-            </File>
-            <File>
-              <FileName>i2c_tools.cpp</FileName>
-              <FileType>8</FileType>
-              <FilePath>packages\i2c-tools-latest\src\i2c_tools.cpp</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>mpu6xxx</GroupName>
-          <Files>
-            <File>
-              <FileName>mpu6xxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\mpu6xxx-latest\src\mpu6xxx.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensor_inven_mpu6xxx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\mpu6xxx-latest\src\sensor_inven_mpu6xxx.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>robots</GroupName>
-          <Files>
-            <File>
-              <FileName>chassis.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\chassis\chassis.c</FilePath>
-            </File>
-            <File>
-              <FileName>controller.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\controller\controller.c</FilePath>
-            </File>
-            <File>
-              <FileName>inc_pid_controller.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\controller\inc_pid_controller.c</FilePath>
-            </File>
-            <File>
-              <FileName>pos_pid_controller.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\controller\pos_pid_controller.c</FilePath>
-            </File>
-            <File>
-              <FileName>ab_phase_encoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\encoder\ab_phase_encoder.c</FilePath>
-            </File>
-            <File>
-              <FileName>encoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\encoder\encoder.c</FilePath>
-            </File>
-            <File>
-              <FileName>single_phase_encoder.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\encoder\single_phase_encoder.c</FilePath>
-            </File>
-            <File>
-              <FileName>kinematics.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\kinematics\kinematics.c</FilePath>
-            </File>
-            <File>
-              <FileName>dual_pwm_motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\motor\dual_pwm_motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\motor\motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>single_pwm_motor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\motor\single_pwm_motor.c</FilePath>
-            </File>
-            <File>
-              <FileName>command.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\protocol\command.c</FilePath>
-            </File>
-            <File>
-              <FileName>ps2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\protocol\ps2.c</FilePath>
-            </File>
-            <File>
-              <FileName>mobile_robot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\robot\mobile_robot.c</FilePath>
-            </File>
-            <File>
-              <FileName>robot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\robot\robot.c</FilePath>
-            </File>
-            <File>
-              <FileName>wheel.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>packages\rt-robot-latest\wheel\wheel.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>CORTEX-M4</GroupName>
-          <Files>
-=======
->>>>>>> ac6347b... add wifi support
-            <File>
-              <FileName>drv_qspi_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>board\ports\drv_qspi_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>startup_stm32l475xx.s</FileName>
-              <FileType>2</FileType>
-<<<<<<< HEAD
-              <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
-            </File>
-            <File>
-              <FileName>backtrace.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\common\backtrace.c</FilePath>
-            </File>
-            <File>
-              <FileName>div0.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\common\div0.c</FilePath>
-            </File>
-            <File>
-              <FileName>showmem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>DeviceDrivers</GroupName>
-          <GroupOption>
-            <CommonProperty>
-              <UseCPPCompiler>0</UseCPPCompiler>
-              <RVCTCodeConst>0</RVCTCodeConst>
-              <RVCTZI>0</RVCTZI>
-              <RVCTOtherData>0</RVCTOtherData>
-              <ModuleSelection>0</ModuleSelection>
-              <IncludeInBuild>1</IncludeInBuild>
-              <AlwaysBuild>0</AlwaysBuild>
-              <GenerateAssemblyFile>0</GenerateAssemblyFile>
-              <AssembleAssemblyFile>0</AssembleAssemblyFile>
-              <PublicsOnly>0</PublicsOnly>
-              <StopOnExitCode>3</StopOnExitCode>
-              <CustomArgument></CustomArgument>
-              <IncludeLibraryModules></IncludeLibraryModules>
-              <ComprImg>0</ComprImg>
-            </CommonProperty>
-            <GroupArmAds>
-              <Cads>
-                <interw>2</interw>
-                <Optim>0</Optim>
-                <oTime>2</oTime>
-                <SplitLS>2</SplitLS>
-                <OneElfS>2</OneElfS>
-                <Strict>2</Strict>
-                <EnumInt>2</EnumInt>
-                <PlainCh>2</PlainCh>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <wLevel>0</wLevel>
-                <uThumb>2</uThumb>
-                <uSurpInc>2</uSurpInc>
-                <uC99>2</uC99>
-                <uGnu>2</uGnu>
-                <useXO>2</useXO>
-                <v6Lang>0</v6Lang>
-                <v6LangP>0</v6LangP>
-                <vShortEn>2</vShortEn>
-                <vShortWch>2</vShortWch>
-                <v6Lto>2</v6Lto>
-                <v6WtE>2</v6WtE>
-                <v6Rtti>2</v6Rtti>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define> </Define>
-                  <Undefine> </Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Cads>
-              <Aads>
-                <interw>2</interw>
-                <Ropi>2</Ropi>
-                <Rwpi>2</Rwpi>
-                <thumb>2</thumb>
-                <SplitLS>2</SplitLS>
-                <SwStkChk>2</SwStkChk>
-                <NoWarn>2</NoWarn>
-                <uSurpInc>2</uSurpInc>
-                <useXO>2</useXO>
-                <uClangAs>2</uClangAs>
-                <VariousControls>
-                  <MiscControls></MiscControls>
-                  <Define></Define>
-                  <Undefine></Undefine>
-                  <IncludePath></IncludePath>
-                </VariousControls>
-              </Aads>
-            </GroupArmAds>
-          </GroupOption>
-          <Files>
-            <File>
-              <FileName>i2c_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\i2c\i2c_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c_dev.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\i2c\i2c_dev.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c-bit-ops.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\i2c\i2c-bit-ops.c</FilePath>
-            </File>
-            <File>
-              <FileName>pin.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\misc\pin.c</FilePath>
-            </File>
-            <File>
-              <FileName>adc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\misc\adc.c</FilePath>
-            </File>
-            <File>
-              <FileName>rt_drv_pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\misc\rt_drv_pwm.c</FilePath>
-            </File>
-=======
-              <FilePath>libraries\STM32L4xx_HAL\CMSIS\Device\ST\STM32L4xx\Source\Templates\arm\startup_stm32l475xx.s</FilePath>
-            </File>
->>>>>>> ac6347b... add wifi support
-            <File>
-              <FileName>drv_sdio_adapter.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_sdio_adapter.c</FilePath>
-            </File>
-<<<<<<< HEAD
-            <File>
-              <FileName>spi_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\spi\spi_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>spi_dev.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\spi\spi_dev.c</FilePath>
-            </File>
-=======
->>>>>>> ac6347b... add wifi support
-            <File>
-              <FileName>drv_wlan.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_wlan.c</FilePath>
-            </File>
-            <File>
-              <FileName>drv_gpio.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_gpio.c</FilePath>
-            </File>
-            <File>
-              <FileName>drv_usart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_usart.c</FilePath>
-            </File>
-            <File>
-              <FileName>drv_spi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_spi.c</FilePath>
-            </File>
-            <File>
-              <FileName>drv_qspi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>libraries\HAL_Drivers\drv_qspi.c</FilePath>
             </File>
             <File>
               <FileName>drv_flash_l4.c</FileName>
@@ -1005,53 +660,8 @@
           </Files>
         </Group>
         <Group>
-<<<<<<< HEAD
-          <GroupName>Sensors</GroupName>
-          <Files>
-            <File>
-              <FileName>sensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\sensors\sensor.c</FilePath>
-            </File>
-            <File>
-              <FileName>sensor_cmd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\drivers\sensors\sensor_cmd.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>finsh</GroupName>
-          <Files>
-            <File>
-              <FileName>shell.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\shell.c</FilePath>
-            </File>
-            <File>
-              <FileName>symbol.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\symbol.c</FilePath>
-            </File>
-            <File>
-              <FileName>cmd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\cmd.c</FilePath>
-            </File>
-            <File>
-              <FileName>msh.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\msh.c</FilePath>
-            </File>
-            <File>
-              <FileName>msh_cmd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\components\finsh\msh_cmd.c</FilePath>
-            </File>
-=======
           <GroupName>rt_ota</GroupName>
           <Files>
->>>>>>> ac6347b... add wifi support
             <File>
               <FileName>librt_ota_noalgo_0.1.2_stm32l4_keil.lib</FileName>
               <FileType>4</FileType>
@@ -1168,7 +778,6 @@
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_usart_ex.c</FilePath>
             </File>
             <File>
-<<<<<<< HEAD
               <FileName>stm32l4xx_hal_i2c.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_i2c.c</FilePath>
@@ -1179,8 +788,6 @@
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_i2c_ex.c</FilePath>
             </File>
             <File>
-=======
->>>>>>> ac6347b... add wifi support
               <FileName>stm32l4xx_hal_spi.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_spi.c</FilePath>
@@ -1196,7 +803,6 @@
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_qspi.c</FilePath>
             </File>
             <File>
-<<<<<<< HEAD
               <FileName>stm32l4xx_hal_lptim.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_lptim.c</FilePath>
@@ -1220,7 +826,8 @@
               <FileName>stm32l4xx_hal_adc_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_adc_ex.c</FilePath>
-=======
+            </File>
+            <File>
               <FileName>stm32l4xx_hal_sd.c</FileName>
               <FileType>1</FileType>
               <FilePath>libraries\STM32L4xx_HAL\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_sd.c</FilePath>
@@ -1269,6 +876,91 @@
               <FileName>libwifi_6181_0.2.4_armcm4_keil.lib</FileName>
               <FileType>4</FileType>
               <FilePath>libraries\wifi\libwifi_6181_0.2.4_armcm4_keil.lib</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>md6_core</GroupName>
+          <Files>
+            <File>
+              <FileName>inv_mpu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\driver\eMPL\inv_mpu.c</FilePath>
+            </File>
+            <File>
+              <FileName>inv_mpu_dmp_motion_driver.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\driver\eMPL\inv_mpu_dmp_motion_driver.c</FilePath>
+            </File>
+            <File>
+              <FileName>log_stm32l.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\driver\stm32L\log_stm32l.c</FilePath>
+            </File>
+            <File>
+              <FileName>md6_port.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\driver\stm32L\md6_port.c</FilePath>
+            </File>
+            <File>
+              <FileName>eMPL_outputs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\eMPL-hal\eMPL_outputs.c</FilePath>
+            </File>
+            <File>
+              <FileName>data_builder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\data_builder.c</FilePath>
+            </File>
+            <File>
+              <FileName>hal_outputs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\hal_outputs.c</FilePath>
+            </File>
+            <File>
+              <FileName>message_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\message_layer.c</FilePath>
+            </File>
+            <File>
+              <FileName>ml_math_func.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\ml_math_func.c</FilePath>
+            </File>
+            <File>
+              <FileName>mlmath.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\mlmath.c</FilePath>
+            </File>
+            <File>
+              <FileName>mpl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\mpl.c</FilePath>
+            </File>
+            <File>
+              <FileName>results_holder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\results_holder.c</FilePath>
+            </File>
+            <File>
+              <FileName>start_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\start_manager.c</FilePath>
+            </File>
+            <File>
+              <FileName>storage_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>md6\core\mllite\storage_manager.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>md6_mpl_library</GroupName>
+          <Files>
+            <File>
+              <FileName>libmpllib.lib</FileName>
+              <FileType>4</FileType>
+              <FilePath>md6\mpl_libraries\Keil\libmpllib_Keil_M4FP\libmpllib.lib</FilePath>
             </File>
           </Files>
         </Group>
@@ -1414,61 +1106,115 @@
               <FileType>1</FileType>
               <FilePath>ports\fal\fal_flash_sfud_port.c</FilePath>
             </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>mpu6xxx</GroupName>
+          <Files>
             <File>
-              <FileName>fal_flash_stm32l4_port.c</FileName>
+              <FileName>mpu6xxx.c</FileName>
               <FileType>1</FileType>
-              <FilePath>ports\fal\fal_flash_stm32l4_port.c</FilePath>
-              <FileOption>
-                <CommonProperty>
-                  <UseCPPCompiler>2</UseCPPCompiler>
-                  <RVCTCodeConst>0</RVCTCodeConst>
-                  <RVCTZI>0</RVCTZI>
-                  <RVCTOtherData>0</RVCTOtherData>
-                  <ModuleSelection>0</ModuleSelection>
-                  <IncludeInBuild>0</IncludeInBuild>
-                  <AlwaysBuild>2</AlwaysBuild>
-                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
-                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
-                  <PublicsOnly>2</PublicsOnly>
-                  <StopOnExitCode>11</StopOnExitCode>
-                  <CustomArgument></CustomArgument>
-                  <IncludeLibraryModules></IncludeLibraryModules>
-                  <ComprImg>1</ComprImg>
-                </CommonProperty>
-                <FileArmAds>
-                  <Cads>
-                    <interw>2</interw>
-                    <Optim>0</Optim>
-                    <oTime>2</oTime>
-                    <SplitLS>2</SplitLS>
-                    <OneElfS>2</OneElfS>
-                    <Strict>2</Strict>
-                    <EnumInt>2</EnumInt>
-                    <PlainCh>2</PlainCh>
-                    <Ropi>2</Ropi>
-                    <Rwpi>2</Rwpi>
-                    <wLevel>0</wLevel>
-                    <uThumb>2</uThumb>
-                    <uSurpInc>2</uSurpInc>
-                    <uC99>2</uC99>
-                    <uGnu>2</uGnu>
-                    <useXO>2</useXO>
-                    <v6Lang>0</v6Lang>
-                    <v6LangP>0</v6LangP>
-                    <vShortEn>2</vShortEn>
-                    <vShortWch>2</vShortWch>
-                    <v6Lto>2</v6Lto>
-                    <v6WtE>2</v6WtE>
-                    <v6Rtti>2</v6Rtti>
-                    <VariousControls>
-                      <MiscControls></MiscControls>
-                      <Define></Define>
-                      <Undefine></Undefine>
-                      <IncludePath></IncludePath>
-                    </VariousControls>
-                  </Cads>
-                </FileArmAds>
-              </FileOption>
+              <FilePath>packages\mpu6xxx-latest\src\mpu6xxx.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor_inven_mpu6xxx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\mpu6xxx-latest\src\sensor_inven_mpu6xxx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>NetUtils</GroupName>
+          <Files>
+            <File>
+              <FileName>telnet.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\netutils-v1.1.0\telnet\telnet.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>robots</GroupName>
+          <Files>
+            <File>
+              <FileName>chassis.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\chassis\chassis.c</FilePath>
+            </File>
+            <File>
+              <FileName>controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\controller\controller.c</FilePath>
+            </File>
+            <File>
+              <FileName>inc_pid_controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\controller\inc_pid_controller.c</FilePath>
+            </File>
+            <File>
+              <FileName>pos_pid_controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\controller\pos_pid_controller.c</FilePath>
+            </File>
+            <File>
+              <FileName>ab_phase_encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\encoder\ab_phase_encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\encoder\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>single_phase_encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\encoder\single_phase_encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>kinematics.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\kinematics\kinematics.c</FilePath>
+            </File>
+            <File>
+              <FileName>dual_pwm_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\motor\dual_pwm_motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\motor\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>single_pwm_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\motor\single_pwm_motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>command.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\protocol\command.c</FilePath>
+            </File>
+            <File>
+              <FileName>ps2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\protocol\ps2.c</FilePath>
+            </File>
+            <File>
+              <FileName>mobile_robot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\robot\mobile_robot.c</FilePath>
+            </File>
+            <File>
+              <FileName>robot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\robot\robot.c</FilePath>
+            </File>
+            <File>
+              <FileName>wheel.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>packages\rt-robot-latest\wheel\wheel.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1483,8 +1229,18 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>cpu</GroupName>
+          <GroupName>CORTEX-M4</GroupName>
           <Files>
+            <File>
+              <FileName>cpuport.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
+            </File>
+            <File>
+              <FileName>context_rvds.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
+            </File>
             <File>
               <FileName>backtrace.c</FileName>
               <FileType>1</FileType>
@@ -1499,16 +1255,6 @@
               <FileName>showmem.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\libcpu\arm\common\showmem.c</FilePath>
-            </File>
-            <File>
-              <FileName>cpuport.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>rt-thread\libcpu\arm\cortex-m4\cpuport.c</FilePath>
-            </File>
-            <File>
-              <FileName>context_rvds.S</FileName>
-              <FileType>2</FileType>
-              <FilePath>rt-thread\libcpu\arm\cortex-m4\context_rvds.S</FilePath>
             </File>
           </Files>
         </Group>
@@ -1625,9 +1371,34 @@
           </GroupOption>
           <Files>
             <File>
+              <FileName>i2c_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\i2c\i2c_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c_dev.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\i2c\i2c_dev.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c-bit-ops.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\i2c\i2c-bit-ops.c</FilePath>
+            </File>
+            <File>
               <FileName>pin.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\misc\pin.c</FilePath>
+            </File>
+            <File>
+              <FileName>adc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\misc\adc.c</FilePath>
+            </File>
+            <File>
+              <FileName>rt_drv_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\misc\rt_drv_pwm.c</FilePath>
             </File>
             <File>
               <FileName>block_dev.c</FileName>
@@ -1758,6 +1529,21 @@
               <FileName>wlan_workqueue.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\drivers\wlan\wlan_workqueue.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Sensors</GroupName>
+          <Files>
+            <File>
+              <FileName>sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\sensors\sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>sensor_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>rt-thread\components\drivers\sensors\sensor_cmd.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2018,7 +1804,6 @@
               <FileName>ping.c</FileName>
               <FileType>1</FileType>
               <FilePath>rt-thread\components\net\lwip-2.0.2\src\apps\ping\ping.c</FilePath>
->>>>>>> ac6347b... add wifi support
             </File>
           </Files>
         </Group>
