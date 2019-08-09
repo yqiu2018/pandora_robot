@@ -14,5 +14,8 @@ void ano_send_motorpwm(uint16_t m_1, uint16_t m_2, uint16_t m_3, uint16_t m_4, u
 void ano_send_pid(uint8_t group, float p1_p, float p1_i, float p1_d, float p2_p, float p2_i, float p2_d, float p3_p, float p3_i, float p3_d);
 int  ano_init(void *param);
 void ano_byte_ready_indicate(void);
+
+void ano_send_user_data(uint8_t number, float d0, float d1, float d2, float d3, float d4, int16_t d5, int16_t d6, int16_t d7, float d8);
+
 #endif
 

@@ -503,6 +503,65 @@ void ano_send_pid(uint8_t group, float p1_p, float p1_i, float p1_d, float p2_p,
     _send_data(data_to_send, _cnt);
 }
 
+void ano_send_user_data(uint8_t number, float d0, float d1, float d2, float d3, float d4, int16_t d5, int16_t d6, int16_t d7, float d8)
+{
+    uint8_t data_to_send[23];
+    uint8_t _cnt = 0;
+    // volatile int16_t _temp;
+
+    data_to_send[_cnt++] = 0xAA;
+    data_to_send[_cnt++] = 0xAA;
+    data_to_send[_cnt++] = 0xF0 + number;
+    data_to_send[_cnt++] = 0;
+
+    data_to_send[_cnt++] = BYTE3(d0);
+    data_to_send[_cnt++] = BYTE2(d0);
+    data_to_send[_cnt++] = BYTE1(d0);
+    data_to_send[_cnt++] = BYTE0(d0);
+
+    data_to_send[_cnt++] = BYTE3(d1);
+    data_to_send[_cnt++] = BYTE2(d1);
+    data_to_send[_cnt++] = BYTE1(d1);
+    data_to_send[_cnt++] = BYTE0(d1);
+
+    data_to_send[_cnt++] = BYTE3(d2);
+    data_to_send[_cnt++] = BYTE2(d2);
+    data_to_send[_cnt++] = BYTE1(d2);
+    data_to_send[_cnt++] = BYTE0(d2);
+
+    data_to_send[_cnt++] = BYTE3(d3);
+    data_to_send[_cnt++] = BYTE2(d3);
+    data_to_send[_cnt++] = BYTE1(d3);
+    data_to_send[_cnt++] = BYTE0(d3);
+
+    data_to_send[_cnt++] = BYTE3(d4);
+    data_to_send[_cnt++] = BYTE2(d4);
+    data_to_send[_cnt++] = BYTE1(d4);
+    data_to_send[_cnt++] = BYTE0(d4);
+
+    data_to_send[_cnt++] = BYTE1(d5);
+    data_to_send[_cnt++] = BYTE0(d5);
+    data_to_send[_cnt++] = BYTE1(d6);
+    data_to_send[_cnt++] = BYTE0(d6);
+    data_to_send[_cnt++] = BYTE1(d7);
+    data_to_send[_cnt++] = BYTE0(d7);
+
+    data_to_send[_cnt++] = BYTE3(d8);
+    data_to_send[_cnt++] = BYTE2(d8);
+    data_to_send[_cnt++] = BYTE1(d8);
+    data_to_send[_cnt++] = BYTE0(d8);
+
+    data_to_send[3] = _cnt - 4;
+
+    uint8_t sum = 0;
+    for (uint8_t i = 0; i < _cnt; i++)
+        sum += data_to_send[i];
+
+    data_to_send[_cnt++] = sum;
+
+    _send_data(data_to_send, _cnt);
+}
+
 void ano_byte_ready_indicate(void)
 {
     rt_sem_release(ano_ready_sem);

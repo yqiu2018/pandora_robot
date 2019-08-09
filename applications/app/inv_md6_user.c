@@ -21,6 +21,18 @@
 #include <log.h>
 #include <packet.h>
 #include <md6_port.h>
+
+#include <ano.h>
+
+
+// Ahrs Thread
+#define THREAD_DELAY_TIME               5
+#define THREAD_PRIORITY                 10
+#define THREAD_STACK_SIZE               2048
+#define THREAD_TIMESLICE                10
+
+static rt_thread_t tid_ahrs = RT_NULL;
+
 /* Private typedef -----------------------------------------------------------*/
 /* Data read from MPL. */
 #define PRINT_ACCEL (0x01)
@@ -125,6 +137,16 @@ static struct platform_data_s compass_pdata = {
 /* Private variables ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* ---------------------------------------------------------------------------*/
+
+static float q16_to_float(int32_t q16)
+{
+    // float tmp = (int)(q16 >> 16) + (q16 & 0xFFFF) * 0.00001525f;
+    float tmp = (float)(q16 / 65536.0f);
+    return tmp;
+}
+
+float inv_yaw_state;
+
 /* Get data from MPL.
  * TODO: Add return values to the inv_get_sensor_type_xxx APIs to differentiate
  * between new and stale data.
@@ -134,7 +156,8 @@ static void read_from_mpl(void)
     long msg, data[9];
     int8_t accuracy;
     unsigned long timestamp;
-//    float float_data[3] = {0};
+    float float_data[3] = {0};
+    float float_agc[9];
 
     // if (inv_get_sensor_type_quat(data, &accuracy, (inv_time_t *)&timestamp))
     // {
@@ -148,28 +171,50 @@ static void read_from_mpl(void)
     //     // if (hal.report & PRINT_QUAT)
     //     //     eMPL_send_data(PACKET_DATA_QUAT, data);
     // }
-
+#if 1
     //     if (hal.report & PRINT_ACCEL) {
-    //         if (inv_get_sensor_type_accel(data, &accuracy,
-    //             (inv_time_t*)&timestamp))
-    //             eMPL_send_data(PACKET_DATA_ACCEL, data);
+            if (inv_get_sensor_type_accel(data, &accuracy, (inv_time_t*)&timestamp))
+            {
+                float_agc[0] = q16_to_float(data[0]);
+                float_agc[1] = q16_to_float(data[1]);
+                float_agc[2] = q16_to_float(data[2]);
+                // eMPL_send_data(PACKET_DATA_ACCEL, data);
+            }
     //     }
     //     if (hal.report & PRINT_GYRO) {
-    //         if (inv_get_sensor_type_gyro(data, &accuracy,
-    //             (inv_time_t*)&timestamp))
-    //             eMPL_send_data(PACKET_DATA_GYRO, data);
+            if (inv_get_sensor_type_gyro(data, &accuracy, (inv_time_t*)&timestamp))
+            {
+                float_agc[3] = q16_to_float(data[0]);
+                float_agc[4] = q16_to_float(data[1]);
+                float_agc[5] = q16_to_float(data[2]);
+                // eMPL_send_data(PACKET_DATA_GYRO, data);
+            }
     //     }
     // #ifdef COMPASS_ENABLED
     //     if (hal.report & PRINT_COMPASS) {
-    //         if (inv_get_sensor_type_compass(data, &accuracy,
-    //             (inv_time_t*)&timestamp))
-    //             eMPL_send_data(PACKET_DATA_COMPASS, data);
+            if (inv_get_sensor_type_compass(data, &accuracy, (inv_time_t*)&timestamp))
+            {
+                float_agc[6] = q16_to_float(data[0]);
+                float_agc[7] = q16_to_float(data[1]);
+                float_agc[8] = q16_to_float(data[2]);
+                // eMPL_send_data(PACKET_DATA_COMPASS, data);
+            }
+
+            ano_send_senser(float_agc[0], float_agc[1], float_agc[2], 
+                float_agc[3], float_agc[4], float_agc[5], 
+                float_agc[6], float_agc[7], float_agc[8], 0);
+#endif //
     //     }
     // #endif
         // if (hal.report & PRINT_EULER) {
             if (inv_get_sensor_type_euler(data, &accuracy, (inv_time_t*)&timestamp))
             {
-                rt_kprintf("\rr-p-y: %3d %3d %3d", (data[0]>>16), (data[1] >> 16), (data[2]>>16));
+                float_data[0] = q16_to_float(data[0]);
+                float_data[1] = q16_to_float(data[1]);
+                float_data[2] = q16_to_float(data[2]);
+                inv_yaw_state = float_data[2];
+                ano_send_status(float_data[0], float_data[1], float_data[2], 0, 0, 0);
+                // rt_kprintf("\rr-p-y: %3d %3d %3d", (data[0]>>16), (data[1] >> 16), (data[2]>>16));
                 //eMPL_send_data(PACKET_DATA_EULER, data);
             }
         // }
@@ -184,10 +229,11 @@ static void read_from_mpl(void)
     //             eMPL_send_data(PACKET_DATA_HEADING, data);
     //     }
     //     if (hal.report & PRINT_LINEAR_ACCEL) {
-    //         if (inv_get_sensor_type_linear_acceleration(float_data, &accuracy, (inv_time_t*)&timestamp)) {
-    //             MPL_LOGI("Linear Accel: %7.5f %7.5f %7.5f\r\n",
-    //                     float_data[0], float_data[1], float_data[2]);
-    //          }
+            if (inv_get_sensor_type_linear_acceleration(float_data, &accuracy, (inv_time_t*)&timestamp)) {
+                // MPL_LOGI("Linear Accel: %7.5f %7.5f %7.5f\r\n",
+                //         float_data[0], float_data[1], float_data[2]);
+                rt_kprintf("\rLinear Accel: %7d %7d %7d", (int)(float_data[0]*100), (int)(float_data[1]*100), (int)(float_data[2]*100));
+             }
     //     }
     //     if (hal.report & PRINT_GRAVITY_VECTOR) {
     //             if (inv_get_sensor_type_gravity(float_data, &accuracy,
@@ -660,7 +706,6 @@ static inline void run_self_test(void)
 
 int md6_main(void)
 {
-
     inv_error_t result;
     unsigned char accel_fsr, new_temp = 0;
     unsigned short gyro_rate, gyro_fsr;
@@ -872,7 +917,6 @@ int md6_main(void)
 
     while (1)
     {
-
         unsigned long sensor_timestamp;
         int new_data = 0;
         // if (USART_GetITStatus(USART2, USART_IT_RXNE)) {
@@ -1064,17 +1108,9 @@ int md6_main(void)
             read_from_mpl();
         }
 
-        rt_thread_mdelay(20);
+        rt_thread_mdelay(THREAD_DELAY_TIME);
     }
 }
-
-// Ahrs Thread
-#define THREAD_DELAY_TIME           5
-#define THREAD_PRIORITY             11
-#define THREAD_STACK_SIZE          8196
-#define THREAD_TIMESLICE             5
-
-static rt_thread_t tid_ahrs = RT_NULL;
 
 static void md6_thread(void *param)
 {

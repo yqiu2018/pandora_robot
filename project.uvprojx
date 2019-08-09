@@ -423,9 +423,9 @@
               <FilePath>rt-thread\src\kservice.c</FilePath>
             </File>
             <File>
-              <FileName>mem.c</FileName>
+              <FileName>memheap.c</FileName>
               <FileType>1</FileType>
-              <FilePath>rt-thread\src\mem.c</FilePath>
+              <FilePath>rt-thread\src\memheap.c</FilePath>
             </File>
             <File>
               <FileName>mempool.c</FileName>
@@ -537,6 +537,11 @@
               <FileType>1</FileType>
               <FilePath>applications\app\main.c</FilePath>
             </File>
+            <File>
+              <FileName>wifi_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\applications\app\wifi_app.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -571,6 +576,11 @@
               <FileName>mobile_cmd.c</FileName>
               <FileType>1</FileType>
               <FilePath>applications\cmd\mobile_cmd.c</FilePath>
+            </File>
+            <File>
+              <FileName>straight_cmd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\applications\cmd\straight_cmd.c</FilePath>
             </File>
           </Files>
         </Group>

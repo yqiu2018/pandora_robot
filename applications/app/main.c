@@ -17,12 +17,14 @@
 extern void car_init(void *parameter);
 extern void ahrs_app_init(void);
 extern void md6_init(void *param);
+extern void wifi_main(void);
+extern void telnet_server(void);
 
 int main(void)
 {
     int count = 1;
 
-//    car_init((0));
+    car_init((0));
 //    ahrs_app_init();
     md6_init("i2c2");
     
@@ -30,6 +32,9 @@ int main(void)
     rt_pin_mode(LED0_PIN, PIN_MODE_OUTPUT);
 //    rt_pin_mode(63, PIN_MODE_OUTPUT);
 //    rt_pin_write(63, PIN_HIGH);
+
+    wifi_main();
+    telnet_server();
     while (count++)
     {
         rt_pin_write(LED0_PIN, PIN_HIGH);
@@ -40,5 +45,3 @@ int main(void)
 
     return RT_EOK;
 }
-
-

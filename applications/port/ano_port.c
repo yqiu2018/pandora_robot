@@ -68,6 +68,11 @@ static void ano(int argc, char *argv[])
     {
         return;
     }
+    if (!rt_strcmp(argv[1], "init_all"))
+    {
+        ano_init(0);
+        _serial_init();
+    }
 
     if (!rt_strcmp(argv[1], "init"))
     {

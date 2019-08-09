@@ -67,14 +67,14 @@ void car_thread(void *param)
     target_velocity.angular_z = 0;
     chassis_set_velocity(chas, target_velocity);
 
-    // Open control
-    // controller_disable(chas->c_wheels[0]->w_controller);
-    // controller_disable(chas->c_wheels[1]->w_controller);
+    // Open loop control
+    controller_disable(chas->c_wheels[0]->w_controller);
+    controller_disable(chas->c_wheels[1]->w_controller);
 
     while (1)
     {
         rt_thread_mdelay(50);
-        chassis_update(chas);
+        // chassis_update(chas);
         // ano_send_senser(chas->c_wheels[0]->rpm, chas->c_wheels[0]->w_controller->target, chas->c_wheels[1]->rpm, chas->c_wheels[1]->w_controller->target,0,0,0,0,0,0);
     }
 
